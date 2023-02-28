@@ -29,23 +29,78 @@ if (passwordlength < 8){
 }
 
 //Prompt for lowercasevalidation
-function lowercaseconditionsaremet (){
-  lowercasevalidation = prompt ('Do you want lower case to be included in your password? Enter  Y or N');
-  lowercasevalidation = lowercasevalidation.toLowerCase();
+// function lowercaseconditionsaremet (){
+//   lowercasevalidation = prompt ('Do you want lower case to be included in your password? Enter YES or NO');
+//   lowercasevalidation = lowercasevalidation.toLowerCase();
 
-  if ('') {
-    alert ('Please type Y or N');
-    lowercaseconditionsaremet();
+//   if ("") {
+//     alert ('Please type YES or NO');
+//     lowercaseconditionsaremet();
+//   } else if (lowercasevalidation === "YES"){
+//     lowercasevalidation = true;
+//     return lowercasevalidation;
+
+//   } else if (lowercasevalidation === "NO"){
+//     lowercasevalidation = false;
+//     return lowercasevalidation;
+
+//   } else {
+//     alert ("Type in YES or NO");
+//     lowercasevalidation();
+//   }
+//   return lowercasevalidation
+// }
+
+function uppercaseconditionsaremet (){
+  uppercasevalidation = prompt ("Do you want upper case to be included in your password?(Enter Yes or No)");
+  uppercasevalidation = uppercasevalidation.toString();
+
+  if ("") {
+    alert ("Please type Yes or No");
+    uppercaseconditionsaremet();
+
+  } else if (uppercasevalidation === 'Yes'){
+    uppercasevalidation = true;
+    return uppercasevalidation;
+
+  } else if (uppercasevalidation === 'No'){
+    uppercasevalidation = false;
+    return uppercasevalidation;
+  } else {
+    alert ("Type in Yes or No");
+    uppercaseconditionsaremet();
+  }
+  return uppercasevalidation;
+}
+
+// //special characters to be included in the pwd generator
+
+function specialcharactersconditions (){
+  specialcharactersvalidation = prompt ("Do you want special characters to be included in your password? Enter Yes or No");
+  specialcharactersvalidation = specialcharactersvalidation.toString();
+
+  if (specialcharactersvalidation === null || specialcharactersvalidation === "") {
+    alert ("Please type Yes or No");
+    specialcharactersconditions();
+  }else if (specialcharactersvalidation === "Yes"){
+    specialcharactersvalidation = true;
+    return specialcharactersvalidation;
+  } else {
+    alert ("Type Yes or No");
+    specialcharactersconditions ();
+  }return specialcharactersvalidation;
   }
 
-}
-//run multiple functions and generate pwd  
+// //   if (specialcharactersvalidation === null || specialcharactersvalidation if specialcharactersvalidation)
+// // }
+ 
 function generatePassword (){
   pwdlength ();
   console.log(passwordlength);
-  lowercaseconditionsaremet();
-  console.log (lowercasevalidation);
-  return password
+  uppercaseconditionsaremet();
+  console.log (uppercasevalidation);
+  specialcharactersconditions();
+  console.log(specialcharactersvalidation);
 }
 
 // Write password to the #password input
