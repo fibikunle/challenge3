@@ -3,10 +3,10 @@ var generateBtn = document.querySelector("#generate");
 
 //set variables 
 var passwordlength;
-var lowercasechar = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
-var uppercasechar = "A,B,C,D,E,F,G,G,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
-var numbers = "1,2,3,4,5,6,7,8,9,0"
-var specialcharacters = ['!','"','#','$','%','&','(',')','*','+','-','.','/','≈:',';','<','=','>','?','@','\',','_','{','|','}','~'];
+var lowercasechar = "abcdefghijklmnopqrstuvwxyz";
+var uppercasechar = "ABCDEFGGIJKLMNOPQRSTUVWXYZ";
+var numbers = "1234567890";
+var specialcharacters = "!#$%&(,)*+-./≈:;<=>?@\_{|}~";
 var lowercasevalidation;
 var uppercasevalidation;
 var numbersvalidation;
@@ -27,30 +27,7 @@ if (passwordlength < 8){
 }
   return passwordlength;
 }
-
-//Prompt for lowercasevalidation
-// function lowercaseconditionsaremet (){
-//   lowercasevalidation = prompt ('Do you want lower case to be included in your password? Enter YES or NO');
-//   lowercasevalidation = lowercasevalidation.toLowerCase();
-
-//   if ("") {
-//     alert ('Please type YES or NO');
-//     lowercaseconditionsaremet();
-//   } else if (lowercasevalidation === "YES"){
-//     lowercasevalidation = true;
-//     return lowercasevalidation;
-
-//   } else if (lowercasevalidation === "NO"){
-//     lowercasevalidation = false;
-//     return lowercasevalidation;
-
-//   } else {
-//     alert ("Type in YES or NO");
-//     lowercasevalidation();
-//   }
-//   return lowercasevalidation
-// }
-
+//Prompt for uppercase conditions 
 function uppercaseconditionsaremet (){
   uppercasevalidation = prompt ("Do you want upper case to be included in your password?(Enter Yes or No)");
   uppercasevalidation = uppercasevalidation.toString();
@@ -73,8 +50,31 @@ function uppercaseconditionsaremet (){
   return uppercasevalidation;
 }
 
-// //special characters to be included in the pwd generator
+// Prompt for numbersconditionsaremet
 
+function numbersconditions (){
+  numbersvalidation = prompt ('Do you want numbers to be included in your password? Enter Yes or No');
+  numbersvalidation = numbersvalidation.toString();
+
+  if (numbersvalidation === null) {
+    alert ('Please type Yes or No');
+    numbersvalidation();
+  } else if (numbersvalidation === "Yes"){
+    numbersvalidation = true;
+    return numbersvalidation;
+
+  } else if (numbersvalidation === "No"){
+    numbersvalidation = false;
+    return numbersvalidation;
+
+  } else {
+    alert ("Type in Yes or No");
+    numbersconditions();
+  }
+  return numbersvalidation
+}
+
+//special characters to be included in the password
 function specialcharactersconditions (){
   specialcharactersvalidation = prompt ("Do you want special characters to be included in your password? Enter Yes or No");
   specialcharactersvalidation = specialcharactersvalidation.toString();
@@ -85,22 +85,53 @@ function specialcharactersconditions (){
   }else if (specialcharactersvalidation === "Yes"){
     specialcharactersvalidation = true;
     return specialcharactersvalidation;
+  }else if (specialcharactersvalidation === "No"){
+    specialcharactersvalidation = false;
+    return specialcharactersvalidation;
+
   } else {
     alert ("Type Yes or No");
     specialcharactersconditions ();
   }return specialcharactersvalidation;
   }
+//functions for generating password 
 
-// //   if (specialcharactersvalidation === null || specialcharactersvalidation if specialcharactersvalidation)
-// // }
- 
 function generatePassword (){
   pwdlength ();
   console.log(passwordlength);
   uppercaseconditionsaremet();
   console.log (uppercasevalidation);
+  numbersconditions();
+  console.log(numbersvalidation);
   specialcharactersconditions();
   console.log(specialcharactersvalidation);
+
+
+var xters = lowercasechar;
+var pwd = "";
+if (uppercasevalidation && specialcharactersvalidation && numbersvalidation){
+  xters += uppercasechar + specialcharacters + numbers;
+} else if (uppercasevalidation && numbersvalidation){
+  xters += uppercasechar + numbers;
+} else if (numbersvalidation && specialcharactersvalidation){
+  xters += numbers + specialcharacters;
+}else if (uppercasevalidation && specialcharactersvalidation){
+  xters += uppercasechar + specialcharacters;
+}else if (numbersvalidation) {
+  xters += numbersvalidation;
+}else if (uppercasechar){
+  xters += uppercasechar
+}else if (specialcharactersvalidation){
+  xters += specialcharacters
+
+}else{
+  xters === lowercasechar;
+}
+
+for (var i = 0; i < passwordlength; i++){
+  pwd += xters.charAt(Math.floor(Math.random()*xters.length));
+}
+return pwd
 }
 
 // Write password to the #password input
@@ -110,5 +141,5 @@ function writePassword() {
   passwordText.value = password;
 }
 
-// Add event listener to generate button
+//Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
